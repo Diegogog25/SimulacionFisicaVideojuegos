@@ -1,4 +1,5 @@
 #include "Particle.h"
+#include <cmath>
 
 Particle::Particle(Vector3D pos, Vector3D vel)
 	: _vel(vel), _pos(pos.x, pos.y, pos.z), _acc(0.0f, 0.0f, 0.0f)
@@ -46,5 +47,6 @@ Particle::semiImplicitEuler(double t)
 
 void
 Particle::integrateVerlet(double t) {
-
+	_pos.p += _vel * pow(_d, t) * t + _acc * (0.5f * t * t);
+	_vel = _vel * pow(_d, t) + _acc * t;
 }

@@ -15,9 +15,10 @@ public:
 
 
     void update(double dt) override {
-        //particle_vel->integrate(0.1);
-		//particle_acc->integrate(0.1);
-		particle_damp->integrateEuler(dt);
+        //particle_vel->integrate(dt);
+		//particle_acc->integrate(dt);
+		//particle_damp->integrateEuler(dt);
+        particle_damp->integrateVerlet(dt);
     }
 
     void cleanup() override {
