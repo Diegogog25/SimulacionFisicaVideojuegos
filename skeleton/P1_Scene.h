@@ -41,7 +41,7 @@ private:
 	//Particle* particle_acc = new Particle(Vector3D(0.0f, 0.0f, 0.0f), Vector3D(0.0f, 1.0f, 0.0f), Vector3D(0.0f, 0.1f, 0.0f));
 
 	//Con damping
-	Particle* particle_damp = new Particle(Vector3D(0.0f, 0.0f, 0.0f), Vector3D(0.0f, 1.0f, 0.0f), Vector3D(0.0f, 0.1f, 0.0f), 1.0f);
+    Particle* particle_damp = new Particle(Vector3D(0.0f, 0.0f, 0.0f), Vector3D(6.0f, 8.0f, 0.0f), Vector3D(0.0f, -9.81f, 0.0f), 1.0f);
 
 };
 

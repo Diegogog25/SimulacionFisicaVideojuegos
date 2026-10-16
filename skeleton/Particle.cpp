@@ -23,6 +23,13 @@ Particle::Particle(Vector3D pos, Vector3D vel, Vector3D acc, float damping)
 	renderItem = new RenderItem(shape, &_pos, Vector4(1.0f, 1.0f, 0.0f, 1.0f));
 }
 
+Particle::Particle(Vector3D pos, Vector3D vel, Vector3D acc, float damping, float mass, float radius, const Vector4& color)
+	: _vel(vel), _pos(pos.x, pos.y, pos.z), _acc(acc), _d(damping), _mass(mass)
+{
+	physx::PxShape* shape = CreateShape(physx::PxSphereGeometry(radius));
+	renderItem = new RenderItem(shape, &_pos, color);
+}
+
 Particle::~Particle()
 {
 	if (renderItem) {
