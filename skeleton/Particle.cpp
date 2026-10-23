@@ -43,6 +43,7 @@ Particle::integrateEuler(double t)
 {
 	_pos.p += _vel * t;
 	_vel = _vel * pow(_d, t) + _acc * t;
+	_currLiveTime += t;
 }
 
 void
@@ -50,10 +51,12 @@ Particle::semiImplicitEuler(double t)
 {
 	_vel = _vel * pow(_d, t) + _acc * t;
 	_pos.p += _vel * t;
+	_currLiveTime += t;
 }
 
 void
 Particle::integrateVerlet(double t) {
 	_pos.p += _vel * pow(_d, t) * t + _acc * (0.5f * t * t);
 	_vel = _vel * pow(_d, t) + _acc * t;
+	_currLiveTime += t;
 }

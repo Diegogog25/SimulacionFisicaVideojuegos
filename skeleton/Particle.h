@@ -17,6 +17,8 @@ public:
 	void semiImplicitEuler(double t);
 	void integrateVerlet(double t);
 	float getMass() const { return _mass; }
+	bool isAlive() const { return _currLiveTime < _liveTime; }
+	void setLifeTime(float lt) { _liveTime = lt; }
 	Vector3D getPosition() const { return Vector3D(_pos.p); }
 
 protected:
@@ -26,5 +28,7 @@ protected:
 	RenderItem* renderItem;
 	float _d = 1.0f;
 	float _mass = 1.0f;
+	float _liveTime = 10.0f;
+	float _currLiveTime = 0.0f;
 };
 

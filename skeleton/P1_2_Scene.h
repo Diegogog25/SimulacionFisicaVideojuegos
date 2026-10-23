@@ -47,7 +47,7 @@ private:
         physx::PxVec3 dir = cam.q.rotate(physx::PxVec3(0, 0, -1));
         m_shots.push_back({ std::make_unique<Projectile>(
             Vector3D(cam.p), Vector3D(dir),
-            m_ballMassReal, 8.0f * m_increasedVelReal, 4.0f, 0.12f, 0.98f, Vector4(1.0f, 0.5f, 0.0f, 1.0f), false), 0.0 });
+            m_ballMassReal, 4.0f * m_increasedVelReal, 4.0f, 0.12f, 0.98f, Vector4(1.0f, 0.5f, 0.0f, 1.0f), false), 0.0 });
     }
 
     void shootBullet(const physx::PxTransform& cam) {

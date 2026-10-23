@@ -26,6 +26,7 @@
     <ClCompile Include="Projectile.cpp">
       <Filter>P1</Filter>
     </ClCompile>
+    <ClCompile Include="ParticleGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -55,6 +56,7 @@
     <ClInclude Include="Projectile.h">
       <Filter>P1\Headers</Filter>
     </ClInclude>
+    <ClInclude Include="ParticleGenerator.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">
