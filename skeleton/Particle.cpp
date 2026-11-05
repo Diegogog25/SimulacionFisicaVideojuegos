@@ -49,9 +49,11 @@ Particle::integrateEuler(double t)
 void
 Particle::semiImplicitEuler(double t)
 {
-	_vel = _vel * pow(_d, t) + _acc * t;
+	Vector3D totalAcc = _acc + _force * (1.0f / _mass);
+	_vel = _vel * pow(_d, t) + totalAcc * t;
 	_pos.p += _vel * t;
 	_currLiveTime += t;
+	_force = Vector3D(0.0f, 0.0f, 0.0f);
 }
 
 void

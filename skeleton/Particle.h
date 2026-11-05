@@ -21,6 +21,9 @@ public:
 	void setLifeTime(float lt) { _liveTime = lt; }
 	Vector3D getPosition() const { return Vector3D(_pos.p); }
 
+	//P3
+	void addForce(const Vector3D& f) { _force += f; }
+	Vector3D getVelocity() const { return _vel; }
 protected:
 	Vector3D _vel;
 	physx::PxTransform _pos;
@@ -30,5 +33,8 @@ protected:
 	float _mass = 1.0f;
 	float _liveTime = 10.0f;
 	float _currLiveTime = 0.0f;
+
+	//P3
+	Vector3D _force = Vector3D(0.0f, 0.0f, 0.0f);
 };
 

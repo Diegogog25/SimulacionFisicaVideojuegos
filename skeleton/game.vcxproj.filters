@@ -59,6 +59,16 @@
     </ClInclude>
     <ClInclude Include="ParticleGenerator.h" />
     <ClInclude Include="P2_Scene.h" />
+    <ClInclude Include="ForceGenerator.h">
+      <Filter>P3_Fuerzas</Filter>
+    </ClInclude>
+    <ClInclude Include="ForceRegistry.h">
+      <Filter>P3_Fuerzas</Filter>
+    </ClInclude>
+    <ClInclude Include="GravityForceGenerator.h">
+      <Filter>P3_Fuerzas</Filter>
+    </ClInclude>
+    <ClInclude Include="P3_Scene.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">
@@ -69,6 +79,9 @@
     </Filter>
     <Filter Include="P1\Headers">
       <UniqueIdentifier>{7721529f-6a90-4094-9064-7d184cf5a30e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="P3_Fuerzas">
+      <UniqueIdentifier>{2262c947-72bd-448a-be91-211b0f8b12e5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
