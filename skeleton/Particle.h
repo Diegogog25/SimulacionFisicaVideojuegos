@@ -1,6 +1,11 @@
 #pragma once
 #include "Vector3D.h"
 #include "RenderUtils.hpp"
+#include <memory>
+#include <vector>
+
+class ForceGenerator;
+
 class Particle
 {
 public:
@@ -23,8 +28,16 @@ public:
 
 	//P3
 	void addForce(const Vector3D& f) { _force += f; }
+	void applyForces(const std::vector<ForceGenerator*>& forces, double dt);
 	Vector3D getVelocity() const { return _vel; }
+	//Para clonar una particula con las mismas propiedades
+	std::unique_ptr<Particle> clone() const;
+	//Setters
+	void setPosition(const Vector3D& p) { _pos.p = p; }
+	void setVelocity(const Vector3D& v) { _vel = v; }
+	void hideRender() { if (renderItem) { renderItem->release(); renderItem = nullptr; } }
 protected:
+
 	Vector3D _vel;
 	physx::PxTransform _pos;
 	Vector3D _acc = Vector3D(0.0f, 0.0f, 0.0f);
@@ -36,5 +49,7 @@ protected:
 
 	//P3
 	Vector3D _force = Vector3D(0.0f, 0.0f, 0.0f);
+	float _radius = 1.0f;
+	Vector4 _color{ 1.0f, 1.0f, 0.0f, 1.0f };
 };
 

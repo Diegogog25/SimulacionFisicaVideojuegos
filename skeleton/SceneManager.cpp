@@ -55,19 +55,15 @@ void SceneManager::keyPress(unsigned char key, const physx::PxTransform& cameraT
         changeScene("P0");
         return;
     }
-	else if (key == '1') {
-		changeScene("P1");
-		return;
-    }
-    else if (key == '2') {
+    else if (key == '1') {
         changeScene("P1.2");
         return;
     }
-    else if (key == '3') {
+    else if (key == '2') {
         changeScene("P2");
         return;
     }
-	else if (key == '4') {
+	else if (key == '3') {
 		changeScene("P3");
 		return;
 	}

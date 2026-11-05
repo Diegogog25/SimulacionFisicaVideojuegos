@@ -17,9 +17,6 @@
     <ClCompile Include="P1_2_Scene.cpp">
       <Filter>P1</Filter>
     </ClCompile>
-    <ClCompile Include="P1_Scene.cpp">
-      <Filter>P1</Filter>
-    </ClCompile>
     <ClCompile Include="Particle.cpp">
       <Filter>P1</Filter>
     </ClCompile>
@@ -28,6 +25,7 @@
     </ClCompile>
     <ClCompile Include="ParticleGenerator.cpp" />
     <ClCompile Include="P2_Scene.cpp" />
+    <ClCompile Include="ParticleSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -48,9 +46,6 @@
     <ClInclude Include="P1_2_Scene.h">
       <Filter>P1\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="P1_Scene.h">
-      <Filter>P1\Headers</Filter>
-    </ClInclude>
     <ClInclude Include="Particle.h">
       <Filter>P1\Headers</Filter>
     </ClInclude>
@@ -69,6 +64,14 @@
       <Filter>P3_Fuerzas</Filter>
     </ClInclude>
     <ClInclude Include="P3_Scene.h" />
+    <ClInclude Include="WhirlwindForceGenerator.h">
+      <Filter>P3_Fuerzas</Filter>
+    </ClInclude>
+    <ClInclude Include="WindForceGenerator.h">
+      <Filter>P3_Fuerzas</Filter>
+    </ClInclude>
+    <ClInclude Include="ExplosionForceGenerator.h" />
+    <ClInclude Include="ParticleSystem.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">

@@ -23,7 +23,6 @@
 #include "SceneManager.h"
 #include "EmptyScene.h"
 #include "P0S_Scene.h"
-#include "P1_Scene.h"
 #include "P1_2_Scene.h"
 #include "P2_Scene.h"
 #include "P3_Scene.h"
@@ -104,7 +103,6 @@ void initPhysics(bool interactive)
 	// Registrar las prácticas/escenas del curso
 	SceneManager::instance().registerScene<EmptyScene>("EscenaVacia");
 	SceneManager::instance().registerScene<P0S_Scene>("P0");
-	SceneManager::instance().registerScene<P1_Scene>("P1");
 	SceneManager::instance().registerScene<P1_2_Scene>("P1.2");
 	SceneManager::instance().registerScene<P2_Scene>("P2");
 	SceneManager::instance().registerScene<P3_Scene>("P3");

@@ -1,4 +1,5 @@
 #include "Particle.h"
+#include "ForceGenerator.h"
 #include <cmath>
 
 Particle::Particle(Vector3D pos, Vector3D vel)
@@ -24,7 +25,7 @@ Particle::Particle(Vector3D pos, Vector3D vel, Vector3D acc, float damping)
 }
 
 Particle::Particle(Vector3D pos, Vector3D vel, Vector3D acc, float damping, float mass, float radius, const Vector4& color)
-	: _vel(vel), _pos(pos.x, pos.y, pos.z), _acc(acc), _d(damping), _mass(mass)
+	: _vel(vel), _pos(pos.x, pos.y, pos.z), _acc(acc), _d(damping), _mass(mass), _radius(radius), _color(color)
 {
 	physx::PxShape* shape = CreateShape(physx::PxSphereGeometry(radius));
 	renderItem = new RenderItem(shape, &_pos, color);
@@ -61,4 +62,17 @@ Particle::integrateVerlet(double t) {
 	_pos.p += _vel * pow(_d, t) * t + _acc * (0.5f * t * t);
 	_vel = _vel * pow(_d, t) + _acc * t;
 	_currLiveTime += t;
+}
+
+std::unique_ptr<Particle> Particle::clone() const {
+	auto p = std::make_unique<Particle>(getPosition(), _vel, _acc, _d, _mass, _radius, _color);
+	p->setLifeTime(_liveTime);
+	return p;
+}
+
+void
+Particle::applyForces(const std::vector<ForceGenerator*>& forces, double dt) {
+	for (auto f : forces) {
+		f->updateForce(this, dt);
+	}
 }

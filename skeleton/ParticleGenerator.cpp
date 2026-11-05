@@ -3,23 +3,22 @@ ParticleGenerator::ParticleGenerator(Vector3D pos, Vector3D vel, float pLiveTime
 	_pos(pos), _vel(vel), _pLiveTime(pLiveTime), _nParticles(nParticles) {
 
 }
+
 void
-ParticleGenerator::update(double dt) {
-	for (int i = 0; i < _nParticles; i++) {
-		emit();
-	}
-	for (auto& p : _particles)
-		p->semiImplicitEuler(dt);
-
-	for (auto it = _particles.begin(); it != _particles.end();) {
-		if (!(*it)->isAlive() || (*it)->getPosition().y < _minY)
-			it = _particles.erase(it);
-		else ++it;
-	}
-
+ParticleGenerator::generate(std::vector<std::unique_ptr<Particle>>& out) {
+	for (int i = 0; i < _nParticles; i++)
+		out.push_back(emit());
 }
 
 void
+ParticleGenerator::rebuildModel() {
+	_model = std::make_unique<Particle>(_pos, _vel, _gravity, 0.9f, _mass, _radius, _color);
+	_model->setLifeTime(_pLiveTime);
+	//Para que no se vea la particula modelo
+	_model->hideRender();
+}
+
+std::unique_ptr<Particle>
 ParticleGenerator::emit() {
 	Vector3D pos{ sample(_pos.x, _posSigma.x),
 				  sample(_pos.y, _posSigma.y),
@@ -29,9 +28,10 @@ ParticleGenerator::emit() {
 				  sample(_vel.y, _velSigma.y),
 				  sample(_vel.z, _velSigma.z) };
 
-	auto p = std::make_unique<Particle>(pos, vel, _gravity, 0.9f, 1.0f, _radius, _color);
-	p->setLifeTime(_pLiveTime);
-	_particles.push_back(std::move(p));
+	auto p = _model->clone();
+	p->setPosition(pos);
+	p->setVelocity(vel);
+	return p;
 }
 
 float
