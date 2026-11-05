@@ -27,6 +27,7 @@
       <Filter>P1</Filter>
     </ClCompile>
     <ClCompile Include="ParticleGenerator.cpp" />
+    <ClCompile Include="P2_Scene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -57,6 +58,7 @@
       <Filter>P1\Headers</Filter>
     </ClInclude>
     <ClInclude Include="ParticleGenerator.h" />
+    <ClInclude Include="P2_Scene.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">

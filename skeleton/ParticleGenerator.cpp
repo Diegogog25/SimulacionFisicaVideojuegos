@@ -5,7 +5,9 @@ ParticleGenerator::ParticleGenerator(Vector3D pos, Vector3D vel, float pLiveTime
 }
 void
 ParticleGenerator::update(double dt) {
-	for (int i = 0; i < _nParticles; i++) emitPos();
+	for (int i = 0; i < _nParticles; i++) {
+		emit();
+	}
 	for (auto& p : _particles)
 		p->semiImplicitEuler(dt);
 
@@ -17,28 +19,30 @@ ParticleGenerator::update(double dt) {
 
 }
 
-void ParticleGenerator::emitVel() {
-	std::normal_distribution<float> distX(_vel.x, _velSigma.x);
-	std::normal_distribution<float> distY(_vel.x, _velSigma.x);
-	std::normal_distribution<float> distZ(_vel.x, _velSigma.x);
-	float vx = distX(_rng);
-	float vy = distY(_rng);
-	float vz = distZ(_rng);
-	Vector3D v{ vx, vy, vz };
-	auto p = std::make_unique<Particle>(_pos, v, _gravity, 0.9f, 1.0f, 0.3f, Vector4(0.2f, 0.5f, 1.0f, 1.0f));
+void
+ParticleGenerator::emit() {
+	Vector3D pos{ sample(_pos.x, _posSigma.x),
+				  sample(_pos.y, _posSigma.y),
+				  sample(_pos.z, _posSigma.z) };
+
+	Vector3D vel{ sample(_vel.x, _velSigma.x),
+				  sample(_vel.y, _velSigma.y),
+				  sample(_vel.z, _velSigma.z) };
+
+	auto p = std::make_unique<Particle>(pos, vel, _gravity, 0.9f, 1.0f, _radius, _color);
 	p->setLifeTime(_pLiveTime);
 	_particles.push_back(std::move(p));
 }
 
-void ParticleGenerator::emitPos() {
-	std::normal_distribution<float> posX(_pos.x, _posSigma.x);
-	std::normal_distribution<float> posY(_pos.y, _posSigma.y);
-	std::normal_distribution<float> posZ(_pos.z, _posSigma.z);
-	float px = posX(_rng);
-	float py = posY(_rng);
-	float pz = posZ(_rng);
-	Vector3D pos{ px, py, pz };
-	auto p = std::make_unique<Particle>(pos, _vel, _gravity, 0.9f, 1.0f, 0.3f, Vector4(0.2f, 0.5f, 1.0f, 1.0f));
-	p->setLifeTime(_pLiveTime);
-	_particles.push_back(std::move(p));
+float
+ParticleGenerator::sample(float mid, float range) {
+	if (range <= 0.0f) return mid;
+
+	if (_uniform) {
+		std::uniform_real_distribution<float> dist(mid - range, mid + range);
+		return dist(_rng);
+	}
+
+	std::normal_distribution<float> dist(mid, range);
+	return dist(_rng);
 }
